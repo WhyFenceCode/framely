@@ -33,7 +33,7 @@ export function SettingSelector({
     )
 
     return(
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 mt-3 w-full justify-end">
             <p className="text-sm text-muted-foreground">{lable}</p>
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>

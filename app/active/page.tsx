@@ -97,7 +97,8 @@ export default function Page() {
                                 <div className="h-full flex items-center justify-center">
                                     <div className="w-[275px] space-y-">
                                         <h4 className="text-sm font-semibold mt-2">Setting</h4>
-                                        <SettingSelector lable="Shutter Speed" data={cineBody[bodyName].shutter} unit=""/>
+                                        <SettingSelector lable="Shutter Speed" data={cineBody[bodyName].shutter} unit=" sec"/>
+                                        <SettingSelector lable="ISO" data={cineBody[bodyName].iso} unit=""/>
                                     </div>
                                 </div>
                             </TabsContent>
