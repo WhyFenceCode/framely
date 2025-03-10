@@ -20,9 +20,11 @@ import {
 export function SettingSelector({
     data,
     unit,
+    lable,
   }: {
     data : string[],
     unit : string,
+    lable : string,
   }
 ){
     const [open, setOpen] = React.useState(false)
@@ -31,37 +33,40 @@ export function SettingSelector({
     )
 
     return(
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-            <Button variant="outline" className="w-[150px] justify-start">
-                {selectedStatus ? <>{selectedStatus}</> : <>+ Focal Length</>}
-            </Button>
-            </PopoverTrigger>
-            <PopoverContent className="p-0" side="right" align="start">
-            <Command>
-                <CommandInput placeholder="Change status..." />
-                <CommandList>
-                <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup>
-                    {data.map((dataItem) => (
-                    <CommandItem
-                        key={dataItem}
-                        value={dataItem + unit}
-                        onSelect={(value) => {
-                        setSelectedStatus(
-                            data.find((priority) => dataItem === value) ||
-                            null
-                        )
-                        setOpen(false)
-                        }}
-                    >
-                        {dataItem + unit}
-                    </CommandItem>
-                    ))}
-                </CommandGroup>
-                </CommandList>
-            </Command>
-            </PopoverContent>
-        </Popover>
+        <div className="flex items-center space-x-4">
+            <p className="text-sm text-muted-foreground">{lable}</p>
+            <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                <Button variant="outline" className="w-[150px] justify-start">
+                    {selectedStatus ? <>{selectedStatus}</> : <>+ {lable}</>}
+                </Button>
+                </PopoverTrigger>
+                <PopoverContent className="p-0" side="right" align="start">
+                <Command>
+                    <CommandInput placeholder="Change status..." />
+                    <CommandList>
+                    <CommandEmpty>No results found.</CommandEmpty>
+                    <CommandGroup>
+                        {data.map((dataItem) => (
+                        <CommandItem
+                            key={dataItem}
+                            value={dataItem + unit}
+                            onSelect={(value) => {
+                            setSelectedStatus(
+                                data.find((priority) => dataItem === value) ||
+                                null
+                            )
+                            setOpen(false)
+                            }}
+                        >
+                            {dataItem + unit}
+                        </CommandItem>
+                        ))}
+                    </CommandGroup>
+                    </CommandList>
+                </Command>
+                </PopoverContent>
+            </Popover>
+        </div>
     );
 }

@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import Link from "next/link"
 
@@ -21,56 +19,12 @@ import {
     TabsList, 
     TabsTrigger 
 } from "@/components/ui/tabs"
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
 
 import { cineBody } from "@/app/data/cineBody"
 
-type FocalLength = {
-    value: string
-    label: string
-}
-
-const statuses: FocalLength[] = [
-    {
-      value: "18",
-      label: "18mm",
-    },
-    {
-      value: "24",
-      label: "24mm",
-    },
-    {
-      value: "36",
-      label: "36mm",
-    },
-    {
-      value: "42",
-      label: "42mm",
-    },
-    {
-      value: "54",
-      label: "54mm",
-    },
-  ]
+import { SettingSelector } from "@/components/settingSelector"
 
 export default function Page() {
-    const [open, setOpen] = React.useState(false)
-    const [selectedStatus, setSelectedStatus] = React.useState<FocalLength | null>(
-        null
-    )
-
     const bodyName = "ilme-fx3"
 
     return (
@@ -141,43 +95,9 @@ export default function Page() {
                             </TabsContent>
                             <TabsContent value="settings">
                                 <div className="h-full flex items-center justify-center">
-                                    <div className="w-[250px] space-y-2">
+                                    <div className="w-[275px] space-y-">
                                         <h4 className="text-sm font-semibold mt-2">Setting</h4>
-                                        <div className="flex items-center space-x-4">
-                                            <p className="text-sm text-muted-foreground">Focal Length</p>
-                                            <Popover open={open} onOpenChange={setOpen}>
-                                                <PopoverTrigger asChild>
-                                                <Button variant="outline" className="w-[150px] justify-start">
-                                                    {selectedStatus ? <>{selectedStatus.label}</> : <>+ Focal Length</>}
-                                                </Button>
-                                                </PopoverTrigger>
-                                                <PopoverContent className="p-0" side="right" align="start">
-                                                <Command>
-                                                    <CommandInput placeholder="Change status..." />
-                                                    <CommandList>
-                                                    <CommandEmpty>No results found.</CommandEmpty>
-                                                    <CommandGroup>
-                                                        {statuses.map((status) => (
-                                                        <CommandItem
-                                                            key={status.value}
-                                                            value={status.value}
-                                                            onSelect={(value) => {
-                                                            setSelectedStatus(
-                                                                statuses.find((priority) => priority.value === value) ||
-                                                                null
-                                                            )
-                                                            setOpen(false)
-                                                            }}
-                                                        >
-                                                            {status.label}
-                                                        </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                    </CommandList>
-                                                </Command>
-                                                </PopoverContent>
-                                            </Popover>
-                                        </div>
+                                        <SettingSelector lable="Shutter Speed" data={cineBody[bodyName].shutter} unit=""/>
                                     </div>
                                 </div>
                             </TabsContent>
