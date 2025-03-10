@@ -35,6 +35,8 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
+import { cineBody } from "@/app/data/cineBody"
+
 type FocalLength = {
     value: string
     label: string
@@ -68,6 +70,8 @@ export default function Page() {
     const [selectedStatus, setSelectedStatus] = React.useState<FocalLength | null>(
         null
     )
+
+    const bodyName = "ilme-fx3"
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -115,7 +119,7 @@ export default function Page() {
                                     <div className="w-[350px] space-y-2">
                                         <h4 className="text-sm font-semibold px-4 mt-2">Body</h4>
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
-                                            @sony / fx-3
+                                            @{cineBody[bodyName].brand} / {bodyName}
                                         </div>
                                         <h4 className="text-sm font-semibold px-4 mt-2">Lense</h4>
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
