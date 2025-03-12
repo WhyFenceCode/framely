@@ -16,14 +16,13 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { Input } from "@/components/ui/input"
 
 export function SettingSelector({
     data,
-    unit,
     lable,
   }: {
     data : string[],
-    unit : string,
     lable : string,
   }
 ){
@@ -50,7 +49,7 @@ export function SettingSelector({
                         {data.map((dataItem) => (
                         <CommandItem
                             key={dataItem}
-                            value={dataItem + unit}
+                            value={dataItem}
                             onSelect={(value) => {
                             setSelectedStatus(
                                 data.find((priority) => dataItem === value) ||
@@ -59,7 +58,7 @@ export function SettingSelector({
                             setOpen(false)
                             }}
                         >
-                            {dataItem + unit}
+                            {dataItem}
                         </CommandItem>
                         ))}
                     </CommandGroup>
@@ -67,6 +66,24 @@ export function SettingSelector({
                 </Command>
                 </PopoverContent>
             </Popover>
+        </div>
+    );
+}
+
+export function SettingSelectorWritten({
+    lable,
+    number,
+    placeholder,
+  }: {
+    lable : string,
+    number? : boolean,
+    placeholder? : string,
+  }
+){
+    return(
+        <div className="flex items-center space-x-4 mt-3 w-full justify-end">
+            <p className="text-sm text-muted-foreground">{lable}</p>
+            <Input type={number? "number" : "text"} placeholder={placeholder} className="w-37" />
         </div>
     );
 }

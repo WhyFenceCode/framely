@@ -21,11 +21,13 @@ import {
 } from "@/components/ui/tabs"
 
 import { cineBody } from "@/app/data/cineBody"
+import { cineLens } from "@/app/data/cineLens"
 
-import { SettingSelector } from "@/components/settingSelector"
+import { SettingSelector, SettingSelectorWritten } from "@/components/settingSelector"
 
 export default function Page() {
     const bodyName = "ilme-fx3"
+    const lensName = "sel-18135"
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -75,18 +77,20 @@ export default function Page() {
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
                                             @{cineBody[bodyName].brand} / {bodyName}
                                         </div>
-                                        <h4 className="text-sm font-semibold px-4 mt-2">Lense</h4>
+                                        <h4 className="text-sm font-semibold px-4 mt-2">Lens</h4>
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
-                                            @sony / full-frame 18-55mm
+                                            @{cineLens[lensName].brand} / {cineLens[lensName].focalRange[0]+"-"+cineLens[lensName].focalRange[1]} {"f"+cineLens[lensName].aperture[0]+"-"+cineLens[lensName].aperture[cineLens[lensName].aperture.length-1]} {cineLens[lensName].format}
                                         </div>
                                         {/* The Extra Equipment Section is Generated as Needed */}
-                                        <h4 className="text-sm font-semibold px-4 mt-2">Other Equipment</h4>
+                                        <h4 className="text-sm font-semibold px-4 mt-2">Stabilizer</h4>
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
                                             @dji / ronin rs-3
                                         </div>
+                                        <h4 className="text-sm font-semibold px-4 mt-2">Filters</h4>
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
                                             @k&f concept / neutral density
                                         </div>
+                                        <h4 className="text-sm font-semibold px-4 mt-2">Other Equipment</h4>
                                         <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm mb-2">
                                             @smallrig / micro matte box
                                         </div>
@@ -97,8 +101,10 @@ export default function Page() {
                                 <div className="h-full flex items-center justify-center">
                                     <div className="w-[275px] space-y-">
                                         <h4 className="text-sm font-semibold mt-2">Setting</h4>
-                                        <SettingSelector lable="Shutter Speed" data={cineBody[bodyName].shutter} unit=" sec"/>
-                                        <SettingSelector lable="ISO" data={cineBody[bodyName].iso} unit=""/>
+                                        <SettingSelector lable="Shutter Speed" data={cineBody[bodyName].shutter} />
+                                        <SettingSelector lable="ISO" data={cineBody[bodyName].iso} />
+                                        <SettingSelector lable="Aperture" data={cineLens[lensName].aperture} />
+                                        <SettingSelectorWritten lable="Focal Length" number placeholder={"EX: " + cineLens[lensName].focalRange[0].toString()} />
                                     </div>
                                 </div>
                             </TabsContent>
